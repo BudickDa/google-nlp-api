@@ -30,7 +30,7 @@ export default class NLP {
         {extractEntities: true},
         {extractDocumentSentiment: true}
     ], type = 'PLAIN_TEXT', encodingType = 'UTF8') {
-        return this.fetch(`https://language.googleapis.com/${this.prefix}/documents:annotateText?key=${this.apiKey}`, this.request(text, type, encodingType));
+        return this.fetch(`https://language.googleapis.com/${this.prefix}/documents:annotateText?key=${this.apiKey}`, this.request(text, type, encodingType, features));
     }
 
     request(text, type, encodingType, features) {

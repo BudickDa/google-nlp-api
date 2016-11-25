@@ -71,7 +71,7 @@ var NLP = function () {
             var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'PLAIN_TEXT';
             var encodingType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'UTF8';
 
-            return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:annotateText?key=' + this.apiKey, this.request(text, type, encodingType));
+            return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:annotateText?key=' + this.apiKey, this.request(text, type, encodingType, features));
         }
     }, {
         key: 'request',
