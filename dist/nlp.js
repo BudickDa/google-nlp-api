@@ -1,8 +1,9 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
+exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Created by Daniel Budick on 17 Mär 2017.
@@ -35,89 +36,92 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var NLP = function () {
-    function NLP(apiKey) {
-        var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'v1';
+	function NLP(apiKey) {
+		var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'v1';
 
-        _classCallCheck(this, NLP);
+		_classCallCheck(this, NLP);
 
-        this.prefix = prefix;
-        if (apiKey) {
-            this.apiKey = apiKey;
-        } else if (_process2.default.env.GOOGLE_NLP_API) {
-            this.apiKey = _process2.default.env.GOOGLE_NLP_API;
-        } else {
-            throw new Error('No Google NLP Api key specefied.');
-        }
-    }
+		this.prefix = prefix;
+		if (apiKey) {
+			this.apiKey = apiKey;
+		} else if (_process2.default.env.GOOGLE_NLP_API) {
+			this.apiKey = _process2.default.env.GOOGLE_NLP_API;
+		} else {
+			throw new Error('No Google NLP Api key specefied.');
+		}
+	}
 
-    _createClass(NLP, [{
-        key: 'analyzeEntities',
-        value: function analyzeEntities(text) {
-            var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
-            var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
+	_createClass(NLP, [{
+		key: 'analyzeEntities',
+		value: function analyzeEntities(text) {
+			var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
+			var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
 
-            console.log('https://language.googleapis.com/' + this.prefix + '/documents:analyzeEntities?key=' + this.apiKey);
-            return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:analyzeEntities?key=' + this.apiKey, this.request(text, type, encodingType));
-        }
-    }, {
-        key: 'analyzeSentiment',
-        value: function analyzeSentiment(text) {
-            var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
-            var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
+			return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:analyzeEntities?key=' + this.apiKey, this.request(text, type, encodingType));
+		}
+	}, {
+		key: 'analyzeSentiment',
+		value: function analyzeSentiment(text) {
+			var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
+			var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
 
-            return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:analyzeSentiment?key=' + this.apiKey, this.request(text, type, encodingType));
-        }
-    }, {
-        key: 'analyzeSyntax',
-        value: function analyzeSyntax(text) {
-            var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
-            var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
+			return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:analyzeSentiment?key=' + this.apiKey, this.request(text, type, encodingType));
+		}
+	}, {
+		key: 'analyzeSyntax',
+		value: function analyzeSyntax(text) {
+			var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
+			var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
 
-            return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:analyzeSyntax?key=' + this.apiKey, this.request(text, type, encodingType));
-        }
-    }, {
-        key: 'annotateText',
-        value: function annotateText(text) {
-            var features = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [{ extractSyntax: true }, { extractEntities: true }, { extractDocumentSentiment: true }];
-            var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'PLAIN_TEXT';
-            var encodingType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'UTF8';
+			return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:analyzeSyntax?key=' + this.apiKey, this.request(text, type, encodingType));
+		}
+	}, {
+		key: 'annotateText',
+		value: function annotateText(text) {
+			var features = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+				extractSyntax: true,
+				extractEntities: true,
+				extractDocumentSentiment: true
+			};
+			var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'PLAIN_TEXT';
+			var encodingType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'UTF8';
 
-            return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:annotateText?key=' + this.apiKey, this.request(text, type, encodingType, features));
-        }
-    }, {
-        key: 'request',
-        value: function request(text, type, encodingType, features) {
-            var request = {
-                document: {
-                    type: type,
-                    content: text
-                },
-                encodingType: encodingType
-            };
-            if (features) {
-                request.features = features;
-            }
-            return request;
-        }
-    }, {
-        key: 'fetch',
-        value: function fetch(url, data) {
-            return new Promise(function (resolve, reject) {
-                _request2.default.post({
-                    url: url,
-                    body: data,
-                    json: true
-                }, function (err, response, body) {
-                    if (err) {
-                        reject(err);
-                    }
-                    resolve(body);
-                });
-            });
-        }
-    }]);
+			return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:annotateText?key=' + this.apiKey, this.request(text, type, encodingType, features));
+		}
+	}, {
+		key: 'request',
+		value: function request(text, type, encodingType, features) {
+			var request = {
+				document: {
+					type: type,
+					content: text
+				},
+				encodingType: encodingType
+			};
+			if (features) {
+				request.features = features;
+			}
+			return request;
+		}
+	}, {
+		key: 'fetch',
+		value: function fetch(url, data) {
+			return new Promise(function (resolve, reject) {
+				_request2.default.post({
+					url: url,
+					body: data,
+					json: true
+				}, function (err, response, body) {
+					if (err) {
+						reject(err);
+					}
+					resolve(body);
+				});
+			});
+		}
+	}]);
 
-    return NLP;
+	return NLP;
 }();
 
 exports.default = NLP;
