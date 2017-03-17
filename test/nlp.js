@@ -1,5 +1,5 @@
 const assert = require('assert');
-const NLP = require('./../index');
+const NLP = require('./../dist/nlp');
 const util = require('util');
 const _ = require('underscore');
 
@@ -11,7 +11,7 @@ describe('NLP', function() {
 	 */
 	describe('#analyzeEntities()', function() {
 		it('should return the entitites in this text', function(done) {
-			this.timeout(5000);
+			this.timeout(8000);
 			nlp.analyzeEntities('Michelangelo Caravaggio, Italian painter, is known for\'The Calling of Saint Matthew\'.').then(res => {
 				assert(_.where(res.entities, {name: 'Michelangelo Caravaggio', type: 'PERSON'}).length === 1);
 				done();
@@ -25,7 +25,7 @@ describe('NLP', function() {
 
 	describe('#analyzeSentiment()', function() {
 		it('should return the sentiement of this text', function(done) {
-			this.timeout(5000);
+			this.timeout(8000);
 			nlp.analyzeSentiment('Go fuck yourself!').then(res => {
 				assert(res.documentSentiment.score < 0);
 				done();
@@ -39,7 +39,7 @@ describe('NLP', function() {
 
 	describe('#analyzeSyntax()', function() {
 		it('should return the syntax of this text', function(done) {
-			this.timeout(5000);
+			this.timeout(8000);
 			nlp.analyzeSyntax('Michelangelo Caravaggio, Italian painter, is known for\'The Calling of Saint Matthew\'.').then(res => {
 				assert.deepEqual(res, {
 					sentences: [{
@@ -346,12 +346,8 @@ describe('NLP', function() {
 
 	describe('#annotateText()', function() {
 		it('should return the entitites in this text', function(done) {
-			this.timeout(5000);
-			nlp.annotateText('Michelangelo Caravaggio Italian painter, is known for \'The Calling of Saint Matthew\'.', {
-				extractSyntax: false,
-				extractEntities: true,
-				extractDocumentSentiment: false
-			}).then(res => {
+			this.timeout(8000);
+			nlp.annotateText('Michelangelo Caravaggio Italian painter, is known for \'The Calling of Saint Matthew\'.').then(res => {
 				assert(_.where(res.entities, {name: 'Michelangelo Caravaggio', type: 'PERSON'}).length === 1);
 				done();
 			}).catch(err => {
@@ -368,7 +364,7 @@ describe('NLP', function() {
 
 	describe('#analyzeEntities() with HTML', function() {
 		it('should return the entitites in this text', function(done) {
-			this.timeout(5000);
+			this.timeout(8000);
 			nlp.analyzeEntities('<h2>Michelangelo Caravaggio</h2> Italian painter, is known for <a>\'The Calling of Saint Matthew\'</a>.', 'HTML').then(res => {
 				assert(_.where(res.entities, {name: 'Michelangelo caravaggio', type: 'PERSON'}).length === 1);
 				done();
@@ -382,7 +378,7 @@ describe('NLP', function() {
 
 	describe('#analyzeSentiment() with HTML', function() {
 		it('should return the sentiement of this text', function(done) {
-			this.timeout(5000);
+			this.timeout(8000);
 			nlp.analyzeSentiment('<bold>Go fuck yourself!</bold>', 'HTML').then(res => {
 				assert(res.documentSentiment.score < 0);
 				done();
@@ -396,7 +392,7 @@ describe('NLP', function() {
 
 	describe('#analyzeSyntax() with HTML', function() {
 		it('should return the syntax of this text', function(done) {
-			this.timeout(5000);
+			this.timeout(8000);
 			nlp.analyzeSyntax('<h2>Michelangelo Caravaggio</h2> Italian painter, is known for <a>\'The Calling of Saint Matthew\'</a>.', 'HTML').then(res => {
 				assert.deepEqual(res, {
 					sentences: [{text: {content: 'Michelangelo Caravaggio', beginOffset: 4}},
@@ -723,12 +719,8 @@ describe('NLP', function() {
 
 	describe('#annotateText() with HTML', function() {
 		it('should return the entitites in this text', function(done) {
-			this.timeout(5000);
-			nlp.annotateText('<h2>Michelangelo Caravaggio</h2> Italian painter, is known for <a>\'The Calling of Saint Matthew\'</a>.', {
-				extractSyntax: false,
-				extractEntities: true,
-				extractDocumentSentiment: false
-			}, 'HTML').then(res => {
+			this.timeout(8000);
+			nlp.annotateText('<h2>Michelangelo Caravaggio</h2> Italian painter, is known for <a>\'The Calling of Saint Matthew\'</a>.', 'HTML').then(res => {
 				assert(_.where(res.entities, {name: 'Michelangelo caravaggio', type: 'PERSON'}).length === 1);
 				done();
 			}).catch(err => {

@@ -18,13 +18,13 @@
 
 import request from 'request';
 import process from 'process';
+import dotenv from 'dotenv';
+dotenv.load();
 
-class NLP {
-	constructor(apiKey, prefix = 'v1') {
+export default class NLP {
+	constructor(prefix = 'v1') {
 		this.prefix = prefix;
-		if (apiKey) {
-			this.apiKey = apiKey;
-		} else if (process.env.GOOGLE_NLP_API) {
+		if (process.env.GOOGLE_NLP_API) {
 			this.apiKey = process.env.GOOGLE_NLP_API;
 		} else {
 			throw new Error('No Google NLP Api key specefied.');
@@ -43,11 +43,11 @@ class NLP {
 		return this.fetch(`https://language.googleapis.com/${this.prefix}/documents:analyzeSyntax?key=${this.apiKey}`, this.request(text, type, encodingType));
 	}
 
-	annotateText(text, features = {
+	annotateText(text, type = 'PLAIN_TEXT', encodingType = 'UTF8', features = {
 		extractSyntax: true,
 		extractEntities: true,
 		extractDocumentSentiment: true
-	}, type = 'PLAIN_TEXT', encodingType = 'UTF8') {
+	}) {
 		return this.fetch(`https://language.googleapis.com/${this.prefix}/documents:annotateText?key=${this.apiKey}`, this.request(text, type, encodingType, features));
 	}
 
@@ -80,4 +80,4 @@ class NLP {
 		});
 	}
 }
-export {NLP as default};
+module.exports = NLP;

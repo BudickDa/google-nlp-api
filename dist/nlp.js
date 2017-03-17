@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.default = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       * Created by Daniel Budick on 17 Mär 2017.
@@ -31,20 +30,24 @@ var _process = require('process');
 
 var _process2 = _interopRequireDefault(_process);
 
+var _dotenv = require('dotenv');
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+_dotenv2.default.load();
+
 var NLP = function () {
-	function NLP(apiKey) {
-		var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'v1';
+	function NLP() {
+		var prefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'v1';
 
 		_classCallCheck(this, NLP);
 
 		this.prefix = prefix;
-		if (apiKey) {
-			this.apiKey = apiKey;
-		} else if (_process2.default.env.GOOGLE_NLP_API) {
+		if (_process2.default.env.GOOGLE_NLP_API) {
 			this.apiKey = _process2.default.env.GOOGLE_NLP_API;
 		} else {
 			throw new Error('No Google NLP Api key specefied.');
@@ -78,13 +81,13 @@ var NLP = function () {
 	}, {
 		key: 'annotateText',
 		value: function annotateText(text) {
-			var features = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+			var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
+			var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
+			var features = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {
 				extractSyntax: true,
 				extractEntities: true,
 				extractDocumentSentiment: true
 			};
-			var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'PLAIN_TEXT';
-			var encodingType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'UTF8';
 
 			return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:annotateText?key=' + this.apiKey, this.request(text, type, encodingType, features));
 		}
@@ -125,3 +128,5 @@ var NLP = function () {
 }();
 
 exports.default = NLP;
+
+module.exports = NLP;
