@@ -4,13 +4,20 @@ A small wrapper for the google natural language api
 # Install
 `npm install google-nlp-api`
 
-set API-Key with environment variable
+## Set API-Key with environment variable
 
 **Windows:**
-`set GOOGLE_NLP_API=1234APIKEY`
+`setx GOOGLE_NLP_API 1234APIKEY`
+or you can find the tool from System by typing 'environment' into the search box in start menu.
 
 **Unix:**
 `export GOOGLE_NLP_API=1234APIKEY`
+
+Or:
+Create .env file with the content:
+`GOOGLE_NLP_API=1234APIKEY`
+
+
 
 
 # Usage
@@ -39,3 +46,9 @@ set API-Key with environment variable
         {extractDocumentSentiment: true}
     ];
     nlp.annotateText(text, features).then(res => {console.log(res);});
+
+# Test
+1. Set environment variable GOOGLE_NLP_API.
+2. `npm test`
+3. ???
+4. Profit!

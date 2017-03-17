@@ -4,7 +4,23 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Created by Daniel Budick on 17 Mär 2017.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Copyright 2017 Daniel Budick All rights reserved.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * Contact: daniel@budick.eu / http://budick.eu
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * This file is part of google-nlp-api
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *  is free software: you can redistribute it and/or modify
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * it under the terms of the MIT License
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * google-nlp-api is distributed in the hope that it will be useful,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * but WITHOUT ANY WARRANTY; without even the implied warranty of
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * MIT License for more details.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      *
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * You should have received a copy of the MIT License
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      * along with google-nlp-api.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      */
 
 var _request = require('request');
 
@@ -13,14 +29,6 @@ var _request2 = _interopRequireDefault(_request);
 var _process = require('process');
 
 var _process2 = _interopRequireDefault(_process);
-
-var _url = require('url');
-
-var _url2 = _interopRequireDefault(_url);
-
-var _underscore = require('underscore');
-
-var _underscore2 = _interopRequireDefault(_underscore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,10 +41,13 @@ var NLP = function () {
         _classCallCheck(this, NLP);
 
         this.prefix = prefix;
+        console.log(_process2.default.env);
         if (apiKey) {
             this.apiKey = apiKey;
-        } else if (_process2.default.env.apiKey) {
-            this.apiKey = _process2.default.env.apiKey;
+        } else if (_process2.default.env.GOOGLE_NLP_API) {
+            this.apiKey = _process2.default.env.GOOGLE_NLP_API;
+        } else {
+            throw new Error('No Google NLP Api key specefied.');
         }
     }
 
@@ -46,6 +57,7 @@ var NLP = function () {
             var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'PLAIN_TEXT';
             var encodingType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'UTF8';
 
+            console.log('https://language.googleapis.com/' + this.prefix + '/documents:analyzeEntities?key=' + this.apiKey);
             return this.fetch('https://language.googleapis.com/' + this.prefix + '/documents:analyzeEntities?key=' + this.apiKey, this.request(text, type, encodingType));
         }
     }, {

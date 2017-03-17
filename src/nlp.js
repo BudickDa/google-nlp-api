@@ -26,10 +26,13 @@ export default class NLP {
             this.apiKey = apiKey;
         } else if (process.env.GOOGLE_NLP_API) {
             this.apiKey = process.env.GOOGLE_NLP_API;
+        } else {
+            throw new Error('No Google NLP Api key specefied.');
         }
     }
 
     analyzeEntities(text, type = 'PLAIN_TEXT', encodingType = 'UTF8') {
+        console.log(`https://language.googleapis.com/${this.prefix}/documents:analyzeEntities?key=${this.apiKey}`);
         return this.fetch(`https://language.googleapis.com/${this.prefix}/documents:analyzeEntities?key=${this.apiKey}`, this.request(text, type, encodingType));
     }
 
