@@ -1,15 +1,31 @@
+/**
+ * Created by Daniel Budick on 17 Mär 2017.
+ * Copyright 2017 Daniel Budick All rights reserved.
+ * Contact: daniel@budick.eu / http://budick.eu
+ *
+ * This file is part of google-nlp-api
+ *  is free software: you can redistribute it and/or modify
+ * it under the terms of the MIT License
+ *
+ * google-nlp-api is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MIT License for more details.
+ *
+ * You should have received a copy of the MIT License
+ * along with google-nlp-api.
+ */
+
 import request from 'request';
 import process from 'process';
-import URL from 'url';
-import _ from 'underscore';
 
 export default class NLP {
     constructor(apiKey, prefix = 'v1beta1') {
         this.prefix = prefix;
         if (apiKey) {
             this.apiKey = apiKey;
-        } else if (process.env.apiKey) {
-            this.apiKey = process.env.apiKey;
+        } else if (process.env.GOOGLE_NLP_API) {
+            this.apiKey = process.env.GOOGLE_NLP_API;
         }
     }
 

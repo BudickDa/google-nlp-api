@@ -4,9 +4,18 @@ A small wrapper for the google natural language api
 # Install
 `npm install google-nlp-api`
 
+set API-Key with environment variable
+
+**Windows:**
+`set GOOGLE_NLP_API=1234APIKEY`
+
+**Unix:**
+`export GOOGLE_NLP_API=1234APIKEY`
+
+
 # Usage
 
-    // Provide your API-Key as environment variable apiKey
+    // Provide your API-Key as environment variable GOOGLE_NLP_API
     // or put it as parameter into the constructor
     //Create instance of module
     // apiKey: if provided as environment variable set null or false or leave empty
