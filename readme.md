@@ -13,7 +13,7 @@ or you can find the tool from System by typing 'environment' into the search box
 **Unix:**
 `export GOOGLE_NLP_API=1234APIKEY`
 
-Or:
+**Or:**
 Create .env file with the content:
 `GOOGLE_NLP_API=1234APIKEY`
 

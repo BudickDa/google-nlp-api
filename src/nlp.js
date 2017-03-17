@@ -20,7 +20,7 @@ import request from 'request';
 import process from 'process';
 
 export default class NLP {
-    constructor(apiKey, prefix = 'v1beta1') {
+    constructor(apiKey, prefix = 'v1') {
         this.prefix = prefix;
         if (apiKey) {
             this.apiKey = apiKey;

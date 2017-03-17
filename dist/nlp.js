@@ -36,12 +36,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var NLP = function () {
     function NLP(apiKey) {
-        var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'v1beta1';
+        var prefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'v1';
 
         _classCallCheck(this, NLP);
 
         this.prefix = prefix;
-        console.log(_process2.default.env);
         if (apiKey) {
             this.apiKey = apiKey;
         } else if (_process2.default.env.GOOGLE_NLP_API) {
