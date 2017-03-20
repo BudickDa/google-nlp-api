@@ -18,7 +18,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});
@@ -32,7 +32,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});
@@ -339,7 +339,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});
@@ -353,7 +353,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});
@@ -371,7 +371,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});
@@ -385,7 +385,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});
@@ -712,7 +712,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});
@@ -726,7 +726,7 @@ describe('NLP', function() {
 				done();
 			}).catch(err => {
 				console.error(err);
-				assert.fail();
+				assert.fail(true);
 				done();
 			});
 		});

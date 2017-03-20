@@ -71,9 +71,15 @@ export default class NLP {
 				json: true
 			}, function(err, response, body) {
 				if (err) {
-					reject(err);
+					return reject(err);
 				}
-				resolve(body);
+				if (response.statusCode === 400) {
+					return reject(new Error('Your key is invalid.'));
+				}
+				if (response.statusCode === 200) {
+					return resolve(body);
+				}
+				return reject(new Error(response.statusCode, body));
 			});
 		});
 	}

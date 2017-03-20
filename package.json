@@ -1,6 +1,6 @@
 {
   "name": "google-nlp-api",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "Access googles natural language API.",
   "main": "dist/nlp.js",
   "scripts": {

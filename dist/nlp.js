@@ -30,15 +30,9 @@ var _process = require('process');
 
 var _process2 = _interopRequireDefault(_process);
 
-var _dotenv = require('dotenv');
-
-var _dotenv2 = _interopRequireDefault(_dotenv);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-_dotenv2.default.load();
 
 var NLP = function () {
 	function NLP() {
@@ -116,9 +110,15 @@ var NLP = function () {
 					json: true
 				}, function (err, response, body) {
 					if (err) {
-						reject(err);
+						return reject(err);
 					}
-					resolve(body);
+					if (response.statusCode === 400) {
+						return reject(new Error('Your key is invalid.'));
+					}
+					if (response.statusCode === 200) {
+						return resolve(body);
+					}
+					return reject(new Error(response.statusCode, body));
 				});
 			});
 		}
