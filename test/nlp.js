@@ -2,6 +2,7 @@ const assert = require('assert');
 const NLP = require('./../dist/nlp');
 const util = require('util');
 const _ = require('underscore');
+require('dotenv').load();
 
 describe('NLP', function() {
 	const nlp = new NLP();

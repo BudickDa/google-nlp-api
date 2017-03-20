@@ -17,10 +17,13 @@ or you can find the tool from System by typing 'environment' into the search box
 Create .env file with the content:
 `GOOGLE_NLP_API=1234APIKEY`
 
+and load it with `require('dotenv').load();`
+
 
 # Usage
 
     // Provide your API-Key as environment variable GOOGLE_NLP_API
+    require('dotenv').load(); //load it from an .env file
     //Create instance of module
     // prefix: Prefix of the API, if in doupt leave empty
     const prefix = 'v1';

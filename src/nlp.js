@@ -18,8 +18,6 @@
 
 import request from 'request';
 import process from 'process';
-import dotenv from 'dotenv';
-dotenv.load();
 
 export default class NLP {
 	constructor(prefix = 'v1') {
