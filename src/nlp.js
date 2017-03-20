@@ -74,7 +74,7 @@ export default class NLP {
 					return reject(err);
 				}
 				if (response.statusCode === 400) {
-					return reject(new Error('Your key is invalid.'));
+					return reject(new Error(body));
 				}
 				if (response.statusCode === 200) {
 					return resolve(body);
